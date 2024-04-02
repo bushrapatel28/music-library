@@ -30,23 +30,23 @@ const library = {
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
-const printPlaylists = function(myObject) {
-       //for (let key in myObject) {                           //Iterating over all Keys in myObject
+const printPlaylists = function() {
+       //for (let key in library) {                           //Iterating over all Keys in library
        //if(searchKey === 'playlists') {                        //Finding playlists that matches searchKey ("playlists")
-       for (let key in myObject.playlists) {          //Itering over all Keys of playlists (myObject.playlists)
-              let count = 0;                           //Initializing counter to store no. of tracks in each playlist of playlists (myObject.playlist.tracks)
-              if(Array.isArray(myObject.playlists[key]['tracks']))      //Checking if value of myObject.playlists.tracks is an Array
+       for (let key in library.playlists) {                                    //Itering over all Keys of playlists (library.playlists)
+              let count = 0;                                                    //Initializing counter to store no. of tracks in each playlist of playlists (library.playlist.tracks)
+              if(Array.isArray(library.playlists[key]['tracks']))              //Checking if value of library.playlists.tracks is an Array
               {
-                     for (let track of myObject.playlists[key]['tracks']) {     //Iterating over each element of the array
-                     count += 1;                                             //Incrementing the counter for each track
+                     for (let track of library.playlists[key]['tracks']) {     //Iterating over each element of the array
+                     count += 1;                                                //Incrementing the counter for each track
                      }
               }
-              console.log(`${key}: ${myObject.playlists[key]['name']} - ${count} tracks`);
+              console.log(`${key}: ${library.playlists[key]['name']} - ${count} tracks`);
        }
        //}
       // }
 };
-printPlaylists(library);
+printPlaylists();
 
 
 // prints a list of all tracks, using the following format:
@@ -54,8 +54,11 @@ printPlaylists(library);
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 const printTracks = function() {
-
+       for (let key in library.tracks) {
+              console.log(`${key}: ${library.tracks[key]['name']} by ${library.tracks[key]['artist']} (${library.tracks[key]['album']})`);
+       }
 }
+printTracks();
 
 
 // prints a list of tracks for a given playlist, using the following format:
