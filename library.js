@@ -30,9 +30,23 @@ const library = {
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
-const printPlaylists = function() {
-
-}
+const printPlaylists = function(myObject) {
+       //for (let key in myObject) {                           //Iterating over all Keys in myObject
+       //if(searchKey === 'playlists') {                        //Finding playlists that matches searchKey ("playlists")
+       for (let key in myObject.playlists) {          //Itering over all Keys of playlists (myObject.playlists)
+              let count = 0;                           //Initializing counter to store no. of tracks in each playlist of playlists (myObject.playlist.tracks)
+              if(Array.isArray(myObject.playlists[key]['tracks']))      //Checking if value of myObject.playlists.tracks is an Array
+              {
+                     for (let track of myObject.playlists[key]['tracks']) {     //Iterating over each element of the array
+                     count += 1;                                             //Incrementing the counter for each track
+                     }
+              }
+              console.log(`${key}: ${myObject.playlists[key]['name']} - ${count} tracks`);
+       }
+       //}
+      // }
+};
+printPlaylists(library);
 
 
 // prints a list of all tracks, using the following format:
