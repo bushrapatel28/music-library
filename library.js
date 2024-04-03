@@ -106,7 +106,7 @@ const addTrackToPlaylist = function(trackId, playlistId) {
               }
        }
 }
-addTrackToPlaylist("t03", "p01");
+//addTrackToPlaylist("t03", "p01");
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
@@ -118,16 +118,16 @@ const generateUid = function() {
 
 // adds a track to the library
 const addTrack = function(name, artist, album) {
-       //let id = generateUid();
-       library.tracks.id = { id: id,
+       const id = generateUid();                 //Setting the Generated Unique ID (generateUid()) to a variable
+       library.tracks[id] = {                    //Assigning Object value to the new key/property (id) in Tracks
+              id: id,                            //Adding Key-Value Pairs (id, name, artist, album) to the Property
               name: name,
               artist: artist,
               album: album
        };
-
        console.log(library.tracks);
 }
-//addTrack('abc', 'jkl', 'xyz');
+addTrack('Meteora', 'Linkin Park', 'Numb');
 
 
 // adds a playlist to the library
