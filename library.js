@@ -46,7 +46,11 @@ const printPlaylists = function() {
        //}
       // }
 };
-//printPlaylists();
+console.log(`printPlaylist function
+=========================================================`);
+printPlaylists();
+console.log(`==========================================================
+`);
 
 
 // prints a list of all tracks, using the following format:
@@ -58,7 +62,11 @@ const printTracks = function() {
               console.log(`${key}: ${library.tracks[key]['name']} by ${library.tracks[key]['artist']} (${library.tracks[key]['album']})`);  //Getting info of each sub-key (name, artist, album) in the Tracks Property
        }
 }
-//printTracks();
+console.log(`printTracks function
+=========================================================`);
+printTracks();
+console.log(`==========================================================
+`);
 
 
 // prints a list of tracks for a given playlist, using the following format:
@@ -69,12 +77,7 @@ const printPlaylist = function(playlistId) {
        for (let key in library.playlists) {                                             //Itering over all Keys of playlists (library.playlists)
               if(library.playlists[key]['id'] === playlistId) {                         //Finding playlists that matches playlistId ("playlists")
                      let count = 0;                                                     //Initializing counter to store no. of tracks in each playlist of playlists (library.playlist.tracks)
-                     if(Array.isArray(library.playlists[key]['tracks']))                //Checking if value of library.playlists.tracks is an Array
-                     {
-                            for (let element of library.playlists[key]['tracks']) {           //Iterating over each element of the array
-                                   count += 1;                                                //Incrementing the counter for each track
-                            }
-                     }
+               
                      console.log(`${key}: ${library.playlists[key]['name']} - ${count} tracks`);   //Getting info of each sub-key (name, number of tracks) in Playlist Property
                      
                      for (let track of library.playlists[key]['tracks']) {                     //Iterating over each element of the track values array for each sub-key in the Playlists Property
@@ -83,7 +86,11 @@ const printPlaylist = function(playlistId) {
               }
        }
 }
-//printPlaylist('p01');
+console.log(`printPlaylist(playlistId) function
+=========================================================`);
+printPlaylist('p01');
+console.log(`==========================================================
+`);
 
 
 // adds an existing track to an existing playlist
@@ -92,21 +99,22 @@ const addTrackToPlaylist = function(trackId, playlistId) {
               if(library.playlists[key]['id'] === playlistId) {                         //Finding playlists that matches playlistId ("playlists")
                      let count = 0;                                                     //Initializing counter to store no. of tracks in each playlist of playlists (library.playlist.tracks)
                      library.playlists[key]['tracks'].push(trackId);
-                     if(Array.isArray(library.playlists[key]['tracks']))                //Checking if value of library.playlists.tracks is an Array
-                     {
-                            for (let element of library.playlists[key]['tracks']) {           //Iterating over each element of the array
-                            count += 1;                                                //Incrementing the counter for each track
-                            }
-                            console.log(`${key}: ${library.playlists[key]['name']} - ${count} tracks`);   //Getting info of each sub-key (name, number of tracks) in Playlist Property
-                            
-                            for (let track of library.playlists[key]['tracks']) {                     //Iterating over each element of the track values array for each sub-key in the Playlists Property
-                                   console.log(`${track}: ${library.tracks[track]['name']} by ${library.tracks[track]['artist']} (${library.tracks[track]['album']})`);  //Using that array element to search and provide corresponding track info (name, artist, album) in the Tracks Property
-                            }
+                     
+                     library.playlists[key]['tracks'].forEach(() => count += 1);          //Iterating over each element of the array and Incrementing the counter for each track
+                     console.log(`${key}: ${library.playlists[key]['name']} - ${count} tracks`);   //Getting info of each sub-key (name, number of tracks) in Playlist Property
+                     
+                     for (let track of library.playlists[key]['tracks']) {                     //Iterating over each element of the track values array for each sub-key in the Playlists Property
+                            console.log(`${track}: ${library.tracks[track]['name']} by ${library.tracks[track]['artist']} (${library.tracks[track]['album']})`);  //Using that array element to search and provide corresponding track info (name, artist, album) in the Tracks Property
                      }
+                     
               }
        }
 }
-//addTrackToPlaylist("t03", "p01");
+console.log(`addTrackToPlaylist(trackId, playlistId) function
+=========================================================`);
+addTrackToPlaylist("t03", "p01");
+console.log(`==========================================================
+`);
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
@@ -127,13 +135,27 @@ const addTrack = function(name, artist, album) {
        };
        console.log(library.tracks);
 }
+console.log(`addTracks(name, artist, album) function
+=========================================================`);
 addTrack('Meteora', 'Linkin Park', 'Numb');
+console.log(`==========================================================
+`);
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
-
+       const id = generateUid();                 //Setting the Generated Unique ID (generateUid()) to a variable
+       library.playlists[id] = {                 //Assigning Object value to the new key/property (id) in Playlists
+              id: id,                            //Adding Key-Value Pairs (id, name) to the Property
+              name: name
+       };
+       console.log(library.playlists);
 }
+console.log(`addPlaylist(name) function
+=========================================================`);
+addPlaylist("Rock Music");
+console.log(`==========================================================
+`);
 
 
 // STRETCH:
