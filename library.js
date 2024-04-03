@@ -46,7 +46,7 @@ const printPlaylists = function() {
        //}
       // }
 };
-printPlaylists();
+//printPlaylists();
 
 
 // prints a list of all tracks, using the following format:
@@ -58,7 +58,7 @@ const printTracks = function() {
               console.log(`${key}: ${library.tracks[key]['name']} by ${library.tracks[key]['artist']} (${library.tracks[key]['album']})`);  //Getting info of each sub-key (name, artist, album) in the Tracks Property
        }
 }
-printTracks();
+//printTracks();
 
 
 // prints a list of tracks for a given playlist, using the following format:
@@ -67,7 +67,7 @@ printTracks();
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 const printPlaylist = function(playlistId) {
        for (let key in library.playlists) {                                             //Itering over all Keys of playlists (library.playlists)
-              if(key === playlistId) {                                                  //Finding playlists that matches playlistId ("playlists")
+              if(library.playlists[key]['id'] === playlistId) {                         //Finding playlists that matches playlistId ("playlists")
                      let count = 0;                                                     //Initializing counter to store no. of tracks in each playlist of playlists (library.playlist.tracks)
                      if(Array.isArray(library.playlists[key]['tracks']))                //Checking if value of library.playlists.tracks is an Array
                      {
@@ -83,14 +83,30 @@ const printPlaylist = function(playlistId) {
               }
        }
 }
-printPlaylist('p01');
+//printPlaylist('p01');
 
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
-
+       for (let key in library.playlists) {                                             //Itering over all Keys of playlists (library.playlists)
+              if(library.playlists[key]['id'] === playlistId) {                         //Finding playlists that matches playlistId ("playlists")
+                     let count = 0;                                                     //Initializing counter to store no. of tracks in each playlist of playlists (library.playlist.tracks)
+                     library.playlists[key]['tracks'].push(trackId);
+                     if(Array.isArray(library.playlists[key]['tracks']))                //Checking if value of library.playlists.tracks is an Array
+                     {
+                            for (let element of library.playlists[key]['tracks']) {           //Iterating over each element of the array
+                            count += 1;                                                //Incrementing the counter for each track
+                            }
+                            console.log(`${key}: ${library.playlists[key]['name']} - ${count} tracks`);   //Getting info of each sub-key (name, number of tracks) in Playlist Property
+                            
+                            for (let track of library.playlists[key]['tracks']) {                     //Iterating over each element of the track values array for each sub-key in the Playlists Property
+                                   console.log(`${track}: ${library.tracks[track]['name']} by ${library.tracks[track]['artist']} (${library.tracks[track]['album']})`);  //Using that array element to search and provide corresponding track info (name, artist, album) in the Tracks Property
+                            }
+                     }
+              }
+       }
 }
-
+addTrackToPlaylist("t03", "p01");
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
@@ -99,10 +115,19 @@ const generateUid = function() {
 }
 
 
+
 // adds a track to the library
 const addTrack = function(name, artist, album) {
+       //let id = generateUid();
+       library.tracks.id = { id: id,
+              name: name,
+              artist: artist,
+              album: album
+       };
 
+       console.log(library.tracks);
 }
+//addTrack('abc', 'jkl', 'xyz');
 
 
 // adds a playlist to the library
